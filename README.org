@@ -67,6 +67,9 @@ To complete the =make= command, the =ANDROID_NDK_ROOT= environment variable must
 :  # to build the source
 :  make build
 
+:  # to build the jars
+:  make jars
+
 *** License
 
 The Android support libraries are licensed under Apache 2.0, in line with the Android OS code on which they are based. The SQLCipher code itself is licensed under a BSD-style license from Zetetic LLC. Finally, the original SQLite code itself is in the public domain.
