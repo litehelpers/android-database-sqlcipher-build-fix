@@ -55,11 +55,11 @@ An article covering both integration of SQLCipher into an Android application as
 
 *** Building
 
-In order to build android-database-sqlcipher from source you will need both the Android SDK as well as Android NDK. With different Android SDK installation approaches available. ~~We currently recommend using Android NDK version r15c.~~
+In order to build android-database-sqlcipher from source you will need both the Android SDK as well as Android NDK. With different Android SDK installation approaches available. +We currently recommend using Android NDK version r15c.+
 
-This custom build branch updated to build using android-ndk 16b (newer android-ndk versions do not support the old armeabi target).
+This custom build branch is updated to build using =android-ndk= version =16b= (newer =android-ndk= versions do not support the old =armeabi= target).
 
-To complete the =make . The =ANDROID_NDK_ROOT= environment variable must be defined which should point to your NDK root. Once you have cloned the repo, change directory into the root of the repository and run the following commands:
+To complete the =make= command, the =ANDROID_NDK_ROOT= environment variable must be defined which should point to your NDK root. Once you have cloned the repo, change directory into the root of the repository and run the following commands:
 
 :  # this only needs to be done once
 :  make init
