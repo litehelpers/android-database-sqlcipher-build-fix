@@ -117,7 +117,7 @@ OPENSSL=openssl-1.1.1
             --arch ${TOOLCHAIN_ARCH} \
             --api ${ANDROID_API_VERSION} \
             --install-dir ${TOOLCHAIN_DIR} \
-            --unified-headers
+            # --unified-headers
 
      if [ $? -ne 0 ]; then
          echo "Error executing make_standalone_toolchain.py for ${TOOLCHAIN_ARCH}"
