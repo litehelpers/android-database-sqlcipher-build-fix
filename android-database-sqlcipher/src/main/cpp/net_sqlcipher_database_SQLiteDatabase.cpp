@@ -201,6 +201,13 @@ namespace sqlcipher {
       goto done;
     }
 
+    if (handle == NULL) {
+      // INTERNAL ERROR NOT EXPECTED:
+      LOGE("INTERNAL ERROR: NULL database handle from sqlite3_open_v2 call\n");
+      throw_sqlite3_exception_errcode(env, err, "INTERNAL ERROR: NULL database handle from sqlite3_open_v2 call");
+      goto done;
+    }
+
     // Check that the database is really read/write when that is what we asked for.
     if ((sqliteFlags & SQLITE_OPEN_READWRITE) && sqlite3_db_readonly(handle, NULL)) {
       throw_sqlite3_exception(env, handle, "Could not open the database in read/write mode.");
