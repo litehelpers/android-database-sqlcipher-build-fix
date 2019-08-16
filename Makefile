@@ -26,6 +26,12 @@ build-release: check
 	$(GRADLE) android-database-sqlcipher:bundleReleaseAar \
 	-PdebugBuild=false
 
+jars:
+	rm -rf lib *.jar
+	cp android-database-sqlcipher/build/intermediates/packaged-classes/release/classes.jar android-database-sqlcipher-classes.jar
+	cp -r android-database-sqlcipher/build/intermediates/jniLibs/release lib
+	jar cf android-database-sqlcipher-ndk.jar lib
+
 publish-local-snapshot:
 	@ $(collect-signing-info) \
 	$(GRADLE) \
