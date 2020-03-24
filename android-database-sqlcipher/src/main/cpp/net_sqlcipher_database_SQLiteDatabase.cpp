@@ -201,6 +201,8 @@ namespace sqlcipher {
       goto done;
     }
 
+    sqlite3_db_config(handle, SQLITE_DBCONFIG_DEFENSIVE, 1, NULL);
+
     // Check that the database is really read/write when that is what we asked for.
     if ((sqliteFlags & SQLITE_OPEN_READWRITE) && sqlite3_db_readonly(handle, NULL)) {
       throw_sqlite3_exception(env, handle, "Could not open the database in read/write mode.");
