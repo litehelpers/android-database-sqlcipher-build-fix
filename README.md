@@ -1,15 +1,23 @@
+## android-database-sqlcipher with JAR build support
+
+- able to build JARs, as documented below
+
+<!-- NOT SUPPORTED with JAR build:
 ### Download Source and Binaries
 
 The latest AAR binary package information can be [here](https://www.zetetic.net/sqlcipher/open-source), the source can be found [here](https://github.com/sqlcipher/android-database-sqlcipher).
 <p><a title="Latest version from Maven Central" href="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher"><img src="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher/badge.svg"></a></p>
+- -->
 
 ### Compatibility
 
 SQLCipher for Android runs on Android 4.1–Android 10, for `armeabi-v7a`, `x86`, `x86_64`, and `arm64_v8a` architectures.
-    
+
+<!-- N/A for fork with JAR build:
 ### Contributions
 
 We welcome contributions, to contribute to SQLCipher for Android, a [contributor agreement](https://www.zetetic.net/contributions/) needs to be submitted. All submissions should be based on the `master` branch.
+- -->
 
 ### An Illustrative Terminal Listing
 
@@ -128,6 +136,26 @@ make build-debug
 # or for a release build:
 make build-release
 ```
+
+### SQLCipher JARs
+
+to build SQLCipher as JARs (which will automatically include the prerequisite `init` and `build-release` make tasks):
+
+```
+make jars
+```
+
+**Important:** When using JAR files or some other local build, it is required to include a recent `androidx.sqlite` artifact from here: <https://mvnrepository.com/artifact/androidx.sqlite/sqlite>
+
+This may done by adding the following block from `android-database-sqlcipher/build.gradle`, as discussed in [sqlcipher/android-database-sqlcipher#475](https://github.com/sqlcipher/android-database-sqlcipher/issues/475):
+
+```
+    dependencies {
+        implementation "androidx.sqlite:sqlite:2.0.1"
+    }
+```
+
+It is recommended to consider using a newer `androidx.sqlite` version such as `2.1.0`.
 
 ### License
 

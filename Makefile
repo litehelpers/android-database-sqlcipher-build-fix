@@ -3,13 +3,23 @@
 	publish-local-release publish-remote-snapshot public-remote-release check
 GRADLE = ./gradlew
 
+# for JARs:
+CLASSES_JAR_BUILD_PATH = android-database-sqlcipher/build/intermediates/packaged-classes/release/classes.jar
+CLASSES_JAR_DEST_FILENAME = android-database-sqlcipher-classes.jar
+JNI_LIB_BUILD_PATH = android-database-sqlcipher/build/intermediates/transforms/stripDebugSymbol/release/0/lib
+CLEAN_JARS = rm -rf lib *.jar
+
+JNI_LIB_JAR_FILENAME = android-database-sqlcipher-ndk.jar
+
 init:
 	git submodule update --init
 
 clean:
+	$(CLEAN_JARS)
 	$(GRADLE) clean
 
 distclean:
+	$(CLEAN_JARS)
 	$(GRADLE) distclean
 
 build-openssl:
@@ -25,6 +35,12 @@ build-debug: check
 build-release: check
 	$(GRADLE) android-database-sqlcipher:bundleReleaseAar \
 	-PdebugBuild=false
+
+jars: init build-release
+	$(CLEAN_JARS)
+	cp $(CLASSES_JAR_BUILD_PATH) $(CLASSES_JAR_DEST_FILENAME)
+	cp -r $(JNI_LIB_BUILD_PATH) .
+	jar cf $(JNI_LIB_JAR_FILENAME) lib
 
 publish-local-snapshot:
 	@ $(collect-signing-info) \
