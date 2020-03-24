@@ -1,6 +1,7 @@
-## android-database-sqlcipher with JAR build support
+## extra-durable android-database-sqlcipher with JAR build support
 
 - able to build JARs, as documented below
+- extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 
 <!-- NOT SUPPORTED with JAR build:
 ### Download Source and Binaries
