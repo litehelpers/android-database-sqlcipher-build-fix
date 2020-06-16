@@ -1,10 +1,12 @@
 ## defensive, extra-durable android-database-sqlcipher with JAR build support
 
+(build from source)
+
 - able to build JARs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 - configures database with `SQLITE_DBCONFIG_DEFENSIVE` to avoid potential corruption due to user-provided SQL
 
-<!-- NOT SUPPORTED with JAR build:
+<!-- N/A - NOT SUPPORTED with this JAR build:
 ### Download Source and Binaries
 
 The latest AAR binary package information can be [here](https://www.zetetic.net/sqlcipher/open-source), the source can be found [here](https://github.com/sqlcipher/android-database-sqlcipher).
@@ -54,40 +56,53 @@ Error: file is encrypted or is not a database
 
 ### Application Integration
 
-You have a two main options for using SQLCipher for Android in your app: 
+You have a two main options for using SQLCipher for Android in your app:
 
 - Using it with Room or other consumers of the `androidx.sqlite` API
 
 - Using the native SQLCipher for Android classes
 
+<!-- N/A - NOT SUPPORTED with this JAR build:
 In both cases, you will need to add a dependency on `net.zetetic:android-database-sqlcipher`,
 such as having the following line in your module's `build.gradle` `dependencies`
 closure:
 
 ```gradle
-implementation 'net.zetetic:android-database-sqlcipher:4.2.0'
+implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+implementation "androidx.sqlite:sqlite:2.0.1"
 ```
 
-(replacing `4.2.0` with the version you want)
+(replacing `4.4.0` with the version you want)
 
 <a title="Latest version from Maven Central" href="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher"><img src="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher/badge.svg"></a>
+- -->
 
 #### Using SQLCipher for Android With Room
 
 SQLCipher for Android has a `SupportFactory` class in the `net.sqlcipher.database` package
 that can be used to configure Room to use SQLCipher for Android.
 
-There are two `SupportFactory` constructors:
+There are three `SupportFactory` constructors:
 
-- Both take a `byte[]` to use as the passphrase (if you have a `char[]`, use
-`SQLiteDatabase.getBytes()` to get a suitable `byte[]` to use)
+- `SupportFactory(byte[] passphrase)`
+- `SupportFactory(byte[] passphrase, SQLiteDatabaseHook hook)`
+- `SupportFactory(byte[] passphrase, SQLiteDatabaseHook hook, boolean clearPassphrase)`
 
-- One constructor has a second parameter: a `SQLiteDatabaseHook` that you can use
-for executing SQL statements before or after the passphrase is used to decrypt
-the database
+All three take a `byte[]` to use as the passphrase (if you have a `char[]`, use
+`SQLiteDatabase.getBytes()` to get a suitable `byte[]` to use).
 
-- One constructor option includes a boolean parameter to opt out of the clearing
-the passphrase used to access the SQLCipher database.
+Two offer a `SQLiteDatabaseHook` parameter that you can use
+for executing SQL statements before or after the passphrase is used to key
+the database.
+
+The three-parameter constructor also offers `clearPassphrase`, which defaults
+to `true` in the other two constructors. If `clearPassphrase` is set to `true`,
+this will zero out the bytes of the `byte[]` after we open the database. This
+is safest from a security standpoint, but it does mean that the `SupportFactory`
+instance is a single-use object. Attempting to reuse the `SupportFactory`
+instance later will result in being unable to open the database, because the
+passphrase will be wrong. If you think that you might need to reuse the
+`SupportFactory` instance, pass `false` for `clearPassphrase`.
 
 Then, pass your `SupportFactory` to `openHelperFactory()` on your `RoomDatabase.Builder`:
 
@@ -158,6 +173,40 @@ This may done by adding the following block from `android-database-sqlcipher/bui
 ```
 
 It is recommended to consider using a newer `androidx.sqlite` version such as `2.1.0`.
+
+**Testing in [sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):**
+
+In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):
+
+- `mkdir -p app/libs`
+- copy the JAR files into `app/libs`
+- apply the following updates to `app/build.gradle`:
+
+```diff
+diff --git a/app/build.gradle b/app/build.gradle
+index 275371a..dcdbfe4 100644
+--- a/app/build.gradle
++++ b/app/build.gradle
+@@ -20,13 +20,14 @@ android {
+ 
+ dependencies {
+   // For testing JAR-based distribution:
+-  // implementation files('libs/sqlcipher.jar')
++  implementation files('libs/android-database-sqlcipher-classes.jar')
++  implementation files('libs/android-database-sqlcipher-ndk.jar')
+ 
+   // For testing local AAR package:
+   // implementation (name: 'android-database-sqlcipher-4.4.0-release', ext: 'aar')
+ 
+   // For testing on remote AAR reference:
+-  implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
++  // implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
+ 
+   // Mandatory dependency:
+   implementation "androidx.sqlite:sqlite:2.0.1"
+```
+
+then build and run the clone using Android Studio or according to the [instructions here](https://developer.android.com/studio/build/building-cmdline)
 
 ### License
 
