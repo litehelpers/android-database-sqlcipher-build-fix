@@ -1,9 +1,11 @@
 ## extra-durable android-database-sqlcipher with JAR build support
 
+(build from source)
+
 - able to build JARs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 
-<!-- NOT SUPPORTED with JAR build:
+<!-- N/A - NOT SUPPORTED with this JAR build:
 ### Download Source and Binaries
 
 The latest AAR binary package information can be [here](https://www.zetetic.net/sqlcipher/open-source), the source can be found [here](https://github.com/sqlcipher/android-database-sqlcipher).
@@ -59,6 +61,7 @@ You have a two main options for using SQLCipher for Android in your app:
 
 - Using the native SQLCipher for Android classes
 
+<!-- N/A - NOT SUPPORTED with this JAR build:
 In both cases, you will need to add a dependency on `net.zetetic:android-database-sqlcipher`,
 such as having the following line in your module's `build.gradle` `dependencies`
 closure:
@@ -70,6 +73,7 @@ implementation 'net.zetetic:android-database-sqlcipher:4.2.0'
 (replacing `4.2.0` with the version you want)
 
 <a title="Latest version from Maven Central" href="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher"><img src="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher/badge.svg"></a>
+- -->
 
 #### Using SQLCipher for Android With Room
 
