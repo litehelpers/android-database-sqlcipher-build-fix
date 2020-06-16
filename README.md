@@ -1,8 +1,12 @@
-## extra-durable android-database-sqlcipher with JAR build support
+## extra-durable android-database-sqlcipher core NDK JAR build
 
 (build from source)
 
-- able to build JARs, as documented below
+based on [`github:sqlcipher/android-database-sqlcipher`](https://github.com/sqlcipher/android-database-sqlcipher), with `android.database.sqlite` C++ and Java classes removed
+
+with additional enhancment(s) by @brodybits from [`github:brodybits/android-database-sqlcipher#v4.x-extra-durable-jar-build`](https://github.com/brodybits/android-database-sqlcipher/tree/v4.x-extra-durable-jar-build):
+
+- able to build JAR with the NDK libs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 
 <!-- N/A - NOT SUPPORTED with this JAR build:
@@ -53,6 +57,7 @@ Error: file is encrypted or is not a database
 ```
 (example courtesy of SQLCipher)
 
+<!-- N/A:
 ### Application Integration
 
 You have a two main options for using SQLCipher for Android in your app:
@@ -138,6 +143,7 @@ in the passphrase as a `char[]` or `byte[]`
 The rest of your code may not need any changes.
 
 An article covering both integration of SQLCipher into an Android application as well as building the source can be found [here](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/).
+- -->
 
 ### Building
 
@@ -153,14 +159,11 @@ make build-debug
 make build-release
 ```
 
-### SQLCipher JARs
+### JAR build
 
-to build SQLCipher as JARs (which will automatically include the prerequisite `init` and `build-release` make tasks):
+to build as a single JAR: `make jar`
 
-```
-make jars
-```
-
+<!-- N/A:
 **Important:** When using JAR files or some other local build, it is required to include a recent `androidx.sqlite` artifact from here: <https://mvnrepository.com/artifact/androidx.sqlite/sqlite>
 
 This may done by adding the following block from `android-database-sqlcipher/build.gradle`, as discussed in [sqlcipher/android-database-sqlcipher#475](https://github.com/sqlcipher/android-database-sqlcipher/issues/475):
@@ -172,6 +175,7 @@ This may done by adding the following block from `android-database-sqlcipher/bui
 ```
 
 It is recommended to consider using a newer `androidx.sqlite` version such as `2.1.0`.
+- -->
 
 **Testing in [sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):**
 
@@ -209,4 +213,4 @@ then build and run the clone using Android Studio or according to the [instructi
 
 ### License
 
-The Android support libraries are licensed under Apache 2.0, in line with the Android OS code on which they are based. The SQLCipher code itself is licensed under a BSD-style license from Zetetic LLC. Finally, the original SQLite code itself is in the public domain.
+The Android support ~~libraries~~ _build scripts_ are licensed under Apache 2.0, in line with the Android OS code on which they are based. The SQLCipher code itself is licensed under a BSD-style license from Zetetic LLC. Finally, the original SQLite code itself is in the public domain.
