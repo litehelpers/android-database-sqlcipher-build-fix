@@ -5,6 +5,8 @@
 - able to build JARs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 
+Note that this version build branch does not externalize the SQLCipher or OpenSSL dependencies.
+
 <!-- N/A - NOT SUPPORTED with this JAR build:
 ### Download Source and Binaries
 
