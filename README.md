@@ -9,6 +9,8 @@ with additional enhancment(s) by @brodybits from [`github:brodybits/android-data
 - able to build JAR with the NDK libs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 
+Note that this version build branch does not externalize the SQLCipher or OpenSSL dependencies.
+
 <!-- N/A - NOT SUPPORTED with this JAR build:
 ### Download Source and Binaries
 
@@ -144,6 +146,15 @@ The rest of your code may not need any changes.
 
 An article covering both integration of SQLCipher into an Android application as well as building the source can be found [here](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/).
 - -->
+
+### ProGuard
+
+For applications which utilize ProGuard, a few additional rules must be included when using SQLCipher for Android. These rules instruct ProGuard to omit the renaming of the internal SQLCipher classes which are used via lookup from the JNI layer. It is worth noting that since SQLCipher or Android is based on open source code there is little value in obfuscating the library anyway. The more important use of ProGuard is to protect your application code and business logic.
+
+```
+-keep,includedescriptorclasses class net.sqlcipher.** { *; }
+-keep,includedescriptorclasses interface net.sqlcipher.** { *; }
+```
 
 ### Building
 
