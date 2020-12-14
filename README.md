@@ -11,6 +11,8 @@ with additional enhancment(s) by @brodybits from [`github:brodybits/android-data
 
 Note that this version build branch does not externalize the SQLCipher or OpenSSL dependencies.
 
+(This version build branch is only intended to be a baseline for more customized NDK JAR builds, not expected to produce a NDK JAR usable from JNI.)
+
 <!-- N/A - NOT SUPPORTED with this JAR build:
 ### Download Source and Binaries
 
