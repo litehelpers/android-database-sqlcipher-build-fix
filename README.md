@@ -184,9 +184,9 @@ This may done by adding the following block from `android-database-sqlcipher/bui
 
 It is recommended to consider using a newer `androidx.sqlite` version such as `2.1.0`.
 
-**Testing in [sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):**
+**Testing in [`sqlcipher/sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests):**
 
-In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):
+In a clone of [`github:sqlcipher/sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests):
 
 - `mkdir -p app/libs`
 - copy the JAR files into `app/libs`
@@ -214,7 +214,11 @@ index 2042ef8..f70dac0 100644
    implementation "androidx.sqlite:sqlite:2.0.1"
 ```
 
-then build and run the clone using Android Studio or according to the [instructions here](https://developer.android.com/studio/build/building-cmdline)
+then build and run the clone using Android Studio or according to <https://developer.android.com/studio/build/building-cmdline>, for example:
+
+```
+./gradlew installDebug
+```
 
 ### License
 
