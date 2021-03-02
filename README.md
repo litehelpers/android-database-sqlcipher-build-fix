@@ -185,9 +185,9 @@ This may done by adding the following block from `android-database-sqlcipher/bui
 
 It is recommended to consider using a newer `androidx.sqlite` version such as `2.1.0`.
 
-**Testing in [sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):**
+**Testing in [`sqlcipher/sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests):**
 
-In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):
+In a clone of [`github:sqlcipher/sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests):
 
 - `mkdir -p app/libs`
 - copy the JAR files into `app/libs`
@@ -195,29 +195,33 @@ In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlc
 
 ```diff
 diff --git a/app/build.gradle b/app/build.gradle
-index 275371a..dcdbfe4 100644
+index 2042ef8..f70dac0 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
-@@ -20,13 +20,14 @@ android {
- 
+@@ -21,12 +21,14 @@ android {
  dependencies {
    // For testing JAR-based distribution:
--  // implementation files('libs/sqlcipher.jar')
+   // implementation files('libs/sqlcipher.jar')
 +  implementation files('libs/android-database-sqlcipher-classes.jar')
 +  implementation files('libs/android-database-sqlcipher-ndk.jar')
  
-   // For testing local AAR package:
-   // implementation (name: 'android-database-sqlcipher-4.4.0-release', ext: 'aar')
+   // For testing local AAR packages:
+   //implementation (name: 'android-database-sqlcipher-4.4.2-release', ext: 'aar')
  
-   // For testing on remote AAR reference:
--  implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
-+  // implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
+   // For testing on remote AAR references:
+-  implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
++  // implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
  
-   // Mandatory dependency:
    implementation "androidx.sqlite:sqlite:2.0.1"
 ```
 
-then build and run the clone using Android Studio or according to the [instructions here](https://developer.android.com/studio/build/building-cmdline)
+then build and run the clone using Android Studio or according to <https://developer.android.com/studio/build/building-cmdline>, for example:
+
+```
+./gradlew installDebug
+```
+
+Note that there may be divergence from the SQLCipher version expected by [`sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests).
 
 ### License
 
