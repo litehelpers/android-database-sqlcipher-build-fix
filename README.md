@@ -220,6 +220,8 @@ then build and run the clone using Android Studio or according to <https://devel
 ./gradlew installDebug
 ```
 
+Note that there may be divergence from the SQLCipher version expected by [`sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests).
+
 ### License
 
 The Android support libraries are licensed under Apache 2.0, in line with the Android OS code on which they are based. The SQLCipher code itself is licensed under a BSD-style license from Zetetic LLC. Finally, the original SQLite code itself is in the public domain.
