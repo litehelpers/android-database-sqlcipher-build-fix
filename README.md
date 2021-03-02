@@ -194,25 +194,23 @@ In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlc
 
 ```diff
 diff --git a/app/build.gradle b/app/build.gradle
-index 275371a..dcdbfe4 100644
+index 2042ef8..f70dac0 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
-@@ -20,13 +20,14 @@ android {
- 
+@@ -21,12 +21,14 @@ android {
  dependencies {
    // For testing JAR-based distribution:
--  // implementation files('libs/sqlcipher.jar')
+   // implementation files('libs/sqlcipher.jar')
 +  implementation files('libs/android-database-sqlcipher-classes.jar')
 +  implementation files('libs/android-database-sqlcipher-ndk.jar')
  
-   // For testing local AAR package:
-   // implementation (name: 'android-database-sqlcipher-4.4.0-release', ext: 'aar')
+   // For testing local AAR packages:
+   //implementation (name: 'android-database-sqlcipher-4.4.2-release', ext: 'aar')
  
-   // For testing on remote AAR reference:
--  implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
-+  // implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
+   // For testing on remote AAR references:
+-  implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
++  // implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
  
-   // Mandatory dependency:
    implementation "androidx.sqlite:sqlite:2.0.1"
 ```
 
