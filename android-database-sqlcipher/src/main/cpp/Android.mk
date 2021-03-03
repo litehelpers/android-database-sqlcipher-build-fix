@@ -8,7 +8,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_LDLIBS := -llog
 LOCAL_LDFLAGS += -L$(ANDROID_NATIVE_ROOT_DIR)/$(TARGET_ARCH_ABI) -fuse-ld=bfd
 LOCAL_STATIC_LIBRARIES += static-libcrypto
-LOCAL_MODULE    := sqlcipher-core
+LOCAL_MODULE    := sqlcipher-ndk-core
 LOCAL_SRC_FILES := sqlite3.c \
 	# end of LOCAL_SRC_FILES
 

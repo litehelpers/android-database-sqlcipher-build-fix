@@ -1,4 +1,4 @@
-## extra-durable android-database-sqlcipher core NDK JAR build
+## extra-durable android-database-sqlcipher NDK core JAR build
 
 (build from source)
 
