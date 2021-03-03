@@ -2,12 +2,12 @@
 
 (build from source)
 
-based on [`github:sqlcipher/android-database-sqlcipher`](https://github.com/sqlcipher/android-database-sqlcipher), with `android.database.sqlite` C++ and Java classes removed
-
-with additional enhancment(s) by @brodybits from [`github:brodybits/android-database-sqlcipher#v4.x-extra-durable-jar-build`](https://github.com/brodybits/android-database-sqlcipher/tree/v4.x-extra-durable-jar-build):
+based on [`github:sqlcipher/android-database-sqlcipher`](https://github.com/sqlcipher/android-database-sqlcipher), with `android.database.sqlite` C++ and Java classes removed, and additional enhancement(s) from [`github:brodybits/android-database-sqlcipher#v4.x-extra-durable-jar-build`](https://github.com/brodybits/android-database-sqlcipher/tree/v4.x-extra-durable-jar-build):
 
 - able to build JAR with the NDK libs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
+
+(This version build branch is only intended to be a baseline for more customized NDK JAR builds, not expected to produce a NDK JAR usable from JNI.)
 
 <!-- N/A - NOT SUPPORTED with this JAR build:
 ### Download Source and Binaries
@@ -81,6 +81,7 @@ implementation "androidx.sqlite:sqlite:2.0.1"
 <a title="Latest version from Maven Central" href="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher"><img src="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher/badge.svg"></a>
 - -->
 
+<!-- N/A:
 #### Using SQLCipher for Android With Room
 
 SQLCipher for Android has a `SupportFactory` class in the `net.sqlcipher.database` package
@@ -177,6 +178,7 @@ This may done by adding the following block from `android-database-sqlcipher/bui
 It is recommended to consider using a newer `androidx.sqlite` version such as `2.1.0`.
 - -->
 
+<!-- N/A:
 **Testing in [sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):**
 
 In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):
@@ -210,6 +212,7 @@ index 275371a..dcdbfe4 100644
 ```
 
 then build and run the clone using Android Studio or according to the [instructions here](https://developer.android.com/studio/build/building-cmdline)
+- -->
 
 ### License
 
