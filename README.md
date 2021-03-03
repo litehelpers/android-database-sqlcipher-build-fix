@@ -7,6 +7,8 @@ based on [`github:sqlcipher/android-database-sqlcipher`](https://github.com/sqlc
 - able to build JAR with the NDK libs, as documented below
 - extra durable with `-DSQLITE_DEFAULT_SYNCHRONOUS=3` build setting in `build.gradle`
 
+Note that this version build branch does not externalize the SQLCipher or OpenSSL dependencies.
+
 (This version build branch is only intended to be a baseline for more customized NDK JAR builds, not expected to produce a NDK JAR usable from JNI.)
 
 <!-- N/A - NOT SUPPORTED with this JAR build:
@@ -146,6 +148,15 @@ The rest of your code may not need any changes.
 An article covering both integration of SQLCipher into an Android application as well as building the source can be found [here](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/).
 - -->
 
+### ProGuard
+
+For applications which utilize ProGuard, a few additional rules must be included when using SQLCipher for Android. These rules instruct ProGuard to omit the renaming of the internal SQLCipher classes which are used via lookup from the JNI layer. It is worth noting that since SQLCipher or Android is based on open source code there is little value in obfuscating the library anyway. The more important use of ProGuard is to protect your application code and business logic.
+
+```
+-keep,includedescriptorclasses class net.sqlcipher.** { *; }
+-keep,includedescriptorclasses interface net.sqlcipher.** { *; }
+```
+
 ### Building
 
 In order to build `android-database-sqlcipher` from source you will need both the Android SDK, Gradle, and the Android NDK. We currently recommend using Android NDK version `r20`. To complete the `make` command, the `ANDROID_NDK_HOME` environment variable must be defined which should point to your NDK root. Once you have cloned the repo, change directory into the root of the repository and run the following commands:
@@ -179,9 +190,9 @@ It is recommended to consider using a newer `androidx.sqlite` version such as `2
 - -->
 
 <!-- N/A:
-**Testing in [sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):**
+**Testing in [`sqlcipher/sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests):**
 
-In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlcipher/sqlcipher-android-tests):
+In a clone of [`github:sqlcipher/sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests):
 
 - `mkdir -p app/libs`
 - copy the JAR files into `app/libs`
@@ -189,29 +200,33 @@ In a clone of [github:sqlcipher/sqlcipher-android-tests](https://github.com/sqlc
 
 ```diff
 diff --git a/app/build.gradle b/app/build.gradle
-index 275371a..dcdbfe4 100644
+index 2042ef8..f70dac0 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
-@@ -20,13 +20,14 @@ android {
- 
+@@ -21,12 +21,14 @@ android {
  dependencies {
    // For testing JAR-based distribution:
--  // implementation files('libs/sqlcipher.jar')
+   // implementation files('libs/sqlcipher.jar')
 +  implementation files('libs/android-database-sqlcipher-classes.jar')
 +  implementation files('libs/android-database-sqlcipher-ndk.jar')
  
-   // For testing local AAR package:
-   // implementation (name: 'android-database-sqlcipher-4.4.0-release', ext: 'aar')
+   // For testing local AAR packages:
+   //implementation (name: 'android-database-sqlcipher-4.4.2-release', ext: 'aar')
  
-   // For testing on remote AAR reference:
--  implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
-+  // implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
+   // For testing on remote AAR references:
+-  implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
++  // implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
  
-   // Mandatory dependency:
    implementation "androidx.sqlite:sqlite:2.0.1"
 ```
 
-then build and run the clone using Android Studio or according to the [instructions here](https://developer.android.com/studio/build/building-cmdline)
+then build and run the clone using Android Studio or according to <https://developer.android.com/studio/build/building-cmdline>, for example:
+
+```
+./gradlew installDebug
+```
+
+Note that there may be divergence from the SQLCipher version expected by [`sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests).
 - -->
 
 ### License
