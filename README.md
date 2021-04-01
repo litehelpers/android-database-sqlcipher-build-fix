@@ -220,7 +220,12 @@ then build and run the clone using Android Studio or according to <https://devel
 ./gradlew installDebug
 ```
 
-Note that there may be divergence from the SQLCipher version expected by [`sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests).
+The test suite should show:
+
+- SQLCipher is working correctly
+- Correct result of `PRAGMA cipher_version`
+- Correct value Java client version (`SQLiteDatabase.SQLCIPHER_ANDROID_VERSION`)
+- Correct OpenSSL version reported by `PRAGMA cipher_provider_version`
 
 ### License
 
