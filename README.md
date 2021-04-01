@@ -202,7 +202,7 @@ In a clone of [`github:sqlcipher/sqlcipher-android-tests`](https://github.com/sq
 
 ```diff
 diff --git a/app/build.gradle b/app/build.gradle
-index 2042ef8..f70dac0 100644
+index 590ee7c..c3f61ea 100644
 --- a/app/build.gradle
 +++ b/app/build.gradle
 @@ -21,12 +21,14 @@ android {
@@ -213,11 +213,11 @@ index 2042ef8..f70dac0 100644
 +  implementation files('libs/android-database-sqlcipher-ndk.jar')
  
    // For testing local AAR packages:
-   //implementation (name: 'android-database-sqlcipher-4.4.2-release', ext: 'aar')
+   //implementation (name: 'android-database-sqlcipher-4.4.3-release', ext: 'aar')
  
    // For testing on remote AAR references:
--  implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
-+  // implementation 'net.zetetic:android-database-sqlcipher:4.4.2@aar'
+-  implementation 'net.zetetic:android-database-sqlcipher:4.4.3@aar'
++  // implementation 'net.zetetic:android-database-sqlcipher:4.4.3@aar'
  
    implementation "androidx.sqlite:sqlite:2.0.1"
 ```
@@ -228,7 +228,12 @@ then build and run the clone using Android Studio or according to <https://devel
 ./gradlew installDebug
 ```
 
-Note that there may be divergence from the SQLCipher version expected by [`sqlcipher-android-tests`](https://github.com/sqlcipher/sqlcipher-android-tests).
+The test suite should show:
+
+- SQLCipher is working correctly
+- Correct result of `PRAGMA cipher_version`
+- Correct value Java client version (`SQLiteDatabase.SQLCIPHER_ANDROID_VERSION`)
+- Correct OpenSSL version reported by `PRAGMA cipher_provider_version`
 - -->
 
 ### License
