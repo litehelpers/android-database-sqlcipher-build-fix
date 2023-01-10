@@ -12,3 +12,4 @@ android-database-sqlcipher/src/main/cpp/sqlite3.[c,h]
 .idea/
 *.iml
 local.properties
+*.log
