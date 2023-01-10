@@ -1,15 +1,21 @@
+## android-database-sqlcipher with some customizations
+
+<!--
 ### Download Source and Binaries
 
 The latest AAR binary package information can be [here](https://www.zetetic.net/sqlcipher/open-source), the source can be found [here](https://github.com/sqlcipher/android-database-sqlcipher).
 <p><a title="Latest version from Maven Central" href="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher"><img src="https://maven-badges.herokuapp.com/maven-central/net.zetetic/android-database-sqlcipher/badge.svg"></a></p>
+- -->
 
 ### Compatibility
 
 SQLCipher for Android runs on Android from 4.1 (Jelly Bean), for `armeabi-v7a`, `x86`, `x86_64`, and `arm64_v8a` architectures.
 
+<!--
 ### Contributions
 
 We welcome contributions, to contribute to SQLCipher for Android, a [contributor agreement](https://www.zetetic.net/contributions/) needs to be submitted. All submissions should be based on the `master` branch.
+- -->
 
 ### An Illustrative Terminal Listing
 
