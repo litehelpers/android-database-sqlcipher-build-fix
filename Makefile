@@ -3,12 +3,17 @@
 	publish-local-release publish-remote-snapshot public-remote-release check
 GRADLE = ./gradlew
 
+NATIVE_LIBS_OUT_ROOT = ./android-database-sqlcipher/build/intermediates/stripped_native_libs/release/out
+RELEASE_CLASSES_ROOT = ./android-database-sqlcipher/build/intermediates/javac/release/classes
+
 clean:
 	$(GRADLE) clean
+	rm -rf lib net *.jar
 
 distclean:
 	$(GRADLE) distclean \
 	-PsqlcipherRoot="$(SQLCIPHER_ROOT)"
+	rm -rf lib net *.jar
 
 build-openssl:
 	$(GRADLE) buildOpenSSL
@@ -36,6 +41,9 @@ build-release:
 	-PopensslAndroidNativeRoot="$(OPENSSL_ANDROID_LIB_ROOT)" \
 	-PsqlcipherCFlags="$(SQLCIPHER_CFLAGS)" \
 	-PsqlcipherAndroidClientVersion="$(SQLCIPHER_ANDROID_VERSION)"
+	cp -r $(NATIVE_LIBS_OUT_ROOT)/lib .
+	cp -r $(RELEASE_CLASSES_ROOT)/net .
+	jar cf android-database-sqlcipher.jar lib net
 
 publish-local-snapshot:
 	@ $(collect-signing-info) \

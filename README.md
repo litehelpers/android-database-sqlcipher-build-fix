@@ -1,6 +1,7 @@
 ## android-database-sqlcipher with some customizations
 
 - configures database with `SQLITE_DBCONFIG_DEFENSIVE` to avoid potential corruption due to user-provided SQL
+- build-release generates JAR as well, easily usable by Cordova plugin for example
 
 <!--
 ### Download Source and Binaries
